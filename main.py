@@ -12,10 +12,11 @@ def decision():
         codestring = content['code']
         code.write(codestring)
         code.close()
+
         returncode = subprocess.call("python print(hello world)", shell=True)
         print(content['code'])
     return jsonify(request.json)
 #    return html
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0', port=5080)

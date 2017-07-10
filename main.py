@@ -16,15 +16,16 @@ def decision():
         subprocess.call("gcc code.c >> result.txt", shell=True)
         result = open('result.txt', 'r')
         resultstr = result.read()
-        if len(resultstr) < 0:
+        if len(resultstr) == 0:
             print("compiler has no errors")
+            subprocess.call("./a.out >> temp.txt", shell=True)
+            result = open('temp.txt')
+            resultstr = result.read()
+            resultsend = {'result': resultstr}
+            return jsonify(resultsend)
         else:
             print("compiler has text...", resultstr)
-        subprocess.call("./a.out >> temp.txt", shell=True)
-        #print(content['code'])
-        print('Here is the response: ')
-    return jsonify(request.json)
-#    return html
+        return jsonify(request.json)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

@@ -1,5 +1,5 @@
 import requests
-res = requests.post('http://localhost:5080', json={'code':'#include <stdio.h> main() { printf("Hello World\n"); }', 'lang':'C'})
+res = requests.post('http://localhost:5000', json={'code':'#include <stdio.h> \nint main() { printf(\"Hello World\"); }', 'lang':'C'})
 if res.ok:
     print(res.json())
 

@@ -11,6 +11,7 @@ RUN apt-get install python3-flask -y
 EXPOSE 5000
 
 COPY main.py main.py
+COPY code.java code.java
 
 ENV NAME World
 

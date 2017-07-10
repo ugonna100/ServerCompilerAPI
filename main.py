@@ -51,7 +51,21 @@ def python(content):
 
 
 def java(content):
-    code = 
+    code = open("code.java", "w")
+    code.write(content['code'])
+    code.close()
+
+    subprocess.call("javac code.java > result.txt", shell=True)
+    result = open('result.txt', 'r')
+    resultstr = result.read()
+    if len(resultstr) == 0:
+        print("Compiling...")
+        subprocess.call("java code > temp.txt", shell=True)
+        result = open('temp.txt', 'r')
+        resultstr = result.read()
+        return resultstr
+    else:
+        return resultstr
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

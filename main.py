@@ -22,6 +22,10 @@ def decision():
         resultstr = java(content)
         resultsend = {'result': resultstr}
         return jsonify(resultsend)
+    elif content['lang'] == "c++":
+        resultstr = cplus(content)
+        resultsend = {'result': resultstr}
+        return jsonify(resultsend)
     else:
         resultsend = {'result': "Not a supported language"}
         return jsonify(resultsend)
@@ -64,6 +68,23 @@ def java(content):
     resultstr = result.read()
     if len(resultstr) == 0:
         subprocess.call("java code > temp.txt", shell=True)
+        result = open('temp.txt', 'r')
+        resultstr = result.read()
+        return resultstr
+    else:
+        return resultstr
+
+
+def cplus(content):
+    code = open("code.cpp", "w")
+    code.write(content['code'])
+    code.close()
+
+    subprocess.call("g++ code.cpp 2>&1 | tee  result.txt", shell=True)
+    result = open('result.txt', 'r')
+    resultstr = result.read()
+    if len(resultstr) == 0:
+        subprocess.call("./a.out > temp.txt", shell=True)
         result = open('temp.txt', 'r')
         resultstr = result.read()
         return resultstr

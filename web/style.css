@@ -1,6 +1,8 @@
 #compilertext {
   height: 10em;
   width: 100%;
+  color: white;
+  background-color: rgb(22,22,22);
 }
 
 #compilebtn {

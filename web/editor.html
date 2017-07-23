@@ -10,27 +10,52 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
   <title>Editor</title>
 </head>
+<nav class="navbar navbar-inverse navbar-fixed-top" style="height: 5%;">
+	<div class="container-fluid font3">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="https://github.com/ugonna100/ServerCompilerAPI">Ugonna Iheanacho</a>
+		</div>
+		<ul class="nav navbar-nav navbar-right">
+      <li class="active">
+        <div class="form-group">
+          <select onchange="changeLang()" class="form-control" id="langSel" style="margin-top: 8px; margin-right: 5px; width: 13em;">
+            <option class="selected" value="java">java</option>
+            <option value="python">python</option>
+            <option value="c_cpp">C</option>
+            <option value="c++">C++</option>
+          </select>
+        </div>
+      </li>
+			<li class="active" id="compile"><a href="#">Compile</a></li>
+			<li><a href="https://github.com/ugonna100/ServerCompilerAPI/blob/master/readme.txt">Help</a></li>
+		</ul>
+	</div>
+</nav>
 <body class="container-fluid" id="main">
   <div class="row">
-    <div id="container" class="col-md-12">
+    <div id="container-fluid" class="col-md-12">
       <pre id="editor">
 //Do not change the class name for java when using java
 class code {
   public static void main(String[] args) {
-    System.out.println("Hello World! hurrr");
+    System.out.println("Jollyho World! Lorem Ipsum and all that.");
   }
 }
     </pre>
     <textarea class="form-control"id="compilertext">Compiler result goes here...</textarea>
-    <button class="btn" id="compilebtn" onclick="compile()">Compile</button>
     </div>
   </div>
 
   <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <script>
       var editor = ace.edit("editor");
-      editor.setTheme("ace/theme/twilight");
+      editor.setTheme("ace/theme/chaos");
       editor.session.setMode("ace/mode/java");
+  </script>
+  <script>
+    $("#compile").click(function() {
+      compile();
+    });
   </script>
 </body>
 </html>

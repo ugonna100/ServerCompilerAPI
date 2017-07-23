@@ -1,7 +1,7 @@
 import requests
 
 # C code test
-# res = requests.post('http://localhost:5000', json={'code': '#include <stdio.h> \nint main() { printf(\"Hello World! This is C!\"); }', 'lang': 'C'})
+# res = requests.post('http://localhost:5000', json={'code': '#include <stdio.h> \nint main() { printf(\"Hello World! This is C!\"); }', 'lang': 'c_cpp'})
 
 # Python code test
 # res = requests.post('http://localhost:5000', json={'code': 'print("Hello World! This is python!")', 'lang': 'python'})

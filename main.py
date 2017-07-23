@@ -10,7 +10,7 @@ CORS(app)
 def decision():
     html = "<h3>Hello you're here</h3>"
     content = request.json
-    if content['lang'] == "C":
+    if content['lang'] == "c_cpp":
         resultstr = c(content)
         resultsend = {'result': resultstr}
         return jsonify(resultsend)
@@ -21,6 +21,9 @@ def decision():
     elif content['lang'] == "java":
         resultstr = java(content)
         resultsend = {'result': resultstr}
+        return jsonify(resultsend)
+    else:
+        resultsend = {'result': "Not a supported language"}
         return jsonify(resultsend)
 
 def c(content):
@@ -45,7 +48,7 @@ def python(content):
     code.write(content['code'])
     code.close()
 
-    subprocess.call("python3 code.py > result.txt", shell=True)
+    subprocess.call("python3 code.py 2>&1 | tee result.txt", shell=True)
     result = open('result.txt', 'r')
     resultstr = result.read()
     return resultstr
@@ -59,7 +62,6 @@ def java(content):
     subprocess.call("javac code.java 2>&1 | tee result.txt", shell=True)
     result = open('result.txt', 'r')
     resultstr = result.read()
-    print("resultstr is: " + resultstr)
     if len(resultstr) == 0:
         subprocess.call("java code > temp.txt", shell=True)
         result = open('temp.txt', 'r')

@@ -12,5 +12,7 @@ docker run -it -p 5000:5000 servercompilerapi
 open index.html and test away.
 ```
 This is expandable to a web server but to do so, it is recommended to implement security practices for bash commands.
-The Docker VM by default does not give maximum priveleges but regardless is seperate from the main host entirely and can be set up again very easily
-To avoid misuse, a parser may be needed to examine code for malicious commands.
+
+The Docker VM by default should not give root privileges and can be set up again very easily.
+
+Regardless, to avoid misuse, a parser may be needed to examine code for malicious commands.

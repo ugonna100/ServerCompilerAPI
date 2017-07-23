@@ -1,8 +1,17 @@
 #compilertext {
-  height: 50em;
-  width: 15em;
+  height: 10em;
+  width: 100%;
 }
 
 #compilebtn {
   width: 15em;
+}
+
+#main {
+  background-color: #191919;
+}
+
+#editor {
+    height: 60em;
+    position: relative;
 }

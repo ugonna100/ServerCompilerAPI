@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 import subprocess
+
 app = Flask(__name__)
+CORS(app)
 
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=["POST", "OPTION"])
 def decision():
     html = "<h3>Hello you're here</h3>"
     content = request.json
@@ -25,17 +28,15 @@ def c(content):
     code.write(content['code'])
     code.close()
 
-    subprocess.call("gcc code.c > result.txt", shell=True)
+    subprocess.call("gcc code.c 2>&1 | tee  result.txt", shell=True)
     result = open('result.txt', 'r')
     resultstr = result.read()
     if len(resultstr) == 0:
-       # print("compiler has no errors")
         subprocess.call("./a.out > temp.txt", shell=True)
         result = open('temp.txt')
         resultstr = result.read()
         return resultstr
     else:
-       # print("compiler has text...", resultstr)
         return resultstr
 
 
@@ -55,11 +56,11 @@ def java(content):
     code.write(content['code'])
     code.close()
 
-    subprocess.call("javac code.java > result.txt", shell=True)
+    subprocess.call("javac code.java 2>&1 | tee result.txt", shell=True)
     result = open('result.txt', 'r')
     resultstr = result.read()
+    print("resultstr is: " + resultstr)
     if len(resultstr) == 0:
-        print("Compiling...")
         subprocess.call("java code > temp.txt", shell=True)
         result = open('temp.txt', 'r')
         resultstr = result.read()
